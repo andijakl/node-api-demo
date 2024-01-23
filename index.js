@@ -60,6 +60,19 @@ const healthData = {
     ],
 };
 
+// Also define the error schema for consistency
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       properties:
+ *         error:
+ *           type: string
+ *           example: 'User name cannot be changed'
+ */
+
 // Configure port and create the server
 const port = process.env.PORT || 3000;
 const app = express();
@@ -135,14 +148,14 @@ app.get('/users', (req, res) => {
  *         description: User found
  *         content:
  *           application/json:
- *            schema:
- *              $ref: '#/components/schemas/User'
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       '404':
  *         description: User not found
  *         content:
  *           application/json:
- *            schema:
- *              type: object
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  */
 app.get('/users/:id', (req, res) => {
     // Get the user ID from the URL path
@@ -216,13 +229,13 @@ app.post('/users', (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               type: object
+ *               $ref: '#/components/schemas/Error'
  *       '404':
  *         description: User not found
  *         content:
  *           application/json:
  *             schema:
- *               type: object
+ *               $ref: '#/components/schemas/Error'
  */
 app.put('/users/:id', (req, res) => {
     // Get the user ID from the URL path
