@@ -1,4 +1,3 @@
-
 /**
  * This example implements a simple health data server using Node.js and Express.
  * The server provides RESTful API endpoints for managing user health data.
