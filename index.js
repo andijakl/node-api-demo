@@ -116,7 +116,7 @@ app.use(cors({ origin: 'http://localhost/' }));
  *         description: Hello World message
  */
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Visit the API docs at <a href="/api-docs/">api-docs</a>.');
 });
 
 /**
