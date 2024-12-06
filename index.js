@@ -4,12 +4,15 @@
  * It uses Swagger for API documentation and validation.
  * The server is configured to run on port 3000 by default, but can be configured using the PORT environment variable.
  * The health data is stored in memory as a simple JSON object acting as a database.
+ * 
  * The API endpoints include:
  * - GET /: Returns a hello world message to test the server.
  * - GET /users: Returns a list of registered users.
  * - GET /users/{id}: Returns a specific user by ID.
  * - POST /users: Creates a new user.
  * - PUT /users/{id}: Updates a user by ID.
+ * 
+ * When running the demo, you can access the API documentation at http://localhost:3000/api-docs.
  * 
  * @see {@link https://swagger.io/|Swagger}
  * @see {@link https://expressjs.com/|Express}
