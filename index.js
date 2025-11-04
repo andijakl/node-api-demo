@@ -116,7 +116,7 @@ app.use(cors({ origin: 'http://localhost/' }));
  *         description: Hello World message
  */
 app.get('/', (req, res) => {
-    res.send('Visit the API docs at <a href="/api-docs/">api-docs</a>.');
+    return res.send('Visit the API docs at <a href="/api-docs/">api-docs</a>.');
 });
 
 /**
@@ -130,7 +130,7 @@ app.get('/', (req, res) => {
  */
 app.get('/users', (req, res) => {
     // Send the whole list of users
-    res.send(healthData.users);
+    return res.send(healthData.users);
 });
 
 /**
@@ -167,9 +167,9 @@ app.get('/users/:id', (req, res) => {
     // e.g., healthData.users[0] -> { id: 1, name: 'John Doe', ... }
     const user = healthData.users.find((u) => u.id === userId);
     // Send 404 error if user not found
-    if (!user) res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ error: 'User not found' });
     // Send user object if found, with status 200 (OK)
-    res.status(200).send(user);
+    return res.status(200).send(user);
 });
 
 /**
@@ -198,7 +198,7 @@ app.post('/users', (req, res) => {
     // Add the new user to the database
     healthData.users.push(newUser);
     // Send the new user object back with status 201 (Created)
-    res.status(201).send(newUser);
+    return res.status(201).send(newUser);
 });
 
 /**
@@ -246,7 +246,7 @@ app.put('/users/:id', (req, res) => {
     const user = healthData.users.find((u) => u.id === userId);
     if (!user) {
         // Send 404 error if user not found
-        res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ error: 'User not found' });
     } else {
         // Update the user object with new data from the request body
         const updatedUser = req.body;
@@ -254,13 +254,12 @@ app.put('/users/:id', (req, res) => {
         // Prevent changing the user name
         if (updatedUser.name && updatedUser.name !== user.name) {
             // Send 400 error if user name is changed (400 = Bad Request)
-            res.status(400).json({ error: 'User name cannot be changed' });
-            return;
+            return res.status(400).json({ error: 'User name cannot be changed' });
         }
         // Assign the updated user data to the original user object
         Object.assign(user, updatedUser);
         // Send the updated user object back with status 200 (OK)
-        res.status(200).send(user);
+        return res.status(200).send(user);
     }
 });
 
